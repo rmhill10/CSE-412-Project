@@ -15,7 +15,7 @@ app.use(express.json())
 app.get("/api/v1/ComputerParts", async (req, res) => {
     try
     {
-        const results = await db.query("SELECT * FROM computer_part");
+        const results = await db.query("SELECT * FROM computer_part INNER JOIN sells ON computer_part.itemid = sells.itemid");
         // console.log(results);
          res.status(200).json({
             status: "success",
@@ -25,11 +25,11 @@ app.get("/api/v1/ComputerParts", async (req, res) => {
             }
          });
     }
-    catch (err) 
+    catch (err)
     {
         console.log(err);
     }
-    
+
 });
 
 // Get a Computer Part
