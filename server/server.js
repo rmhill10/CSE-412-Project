@@ -54,13 +54,26 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
 
 });
 
-//Get GPUs
-app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+//Get all GPUs
+app.get("/api/v1/ComputerParts/gpus", async (req, res) => {
+    
+    // Default variables:
+    // power_lower_bound = MIN(Power)
+    // power_upper_bound = MAX(Power)
+    // vram_lower_bound = MIN(VRAM)
+    // vram_upper_bound = MAX(VRAM)
+    // memory_clock_lower_bound = MIN(Memory_Clock)
+    // memory_clock_upper_bound = MAX(Memory_Clock)
+
     console.log(req.params.itemid);
+
+    var query = "SELECT * FROM gpu, computer_part, sells WHERE gpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
+                " AND Power > $1 AND Power < $2 AND VRAM > $3 AND VRAM < $4 AND Memory_Clock > $5 AND Memory_Clock < $6;";
+    
 
     try
     {
-        const results = await db.query("SELECT * FROM gpu, computer_part, sells ON gpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+        const results = await db.query(query, [, , , , , ]);
 
         res.status(200).json({
             status: "success",
@@ -76,13 +89,23 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
 
 });
 
-//Get CPUs
-app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+//Get all CPUs
+app.get("/api/v1/ComputerParts/cpu", async (req, res) => {
+    
+    // Default variables:
+    // cores_lower_bound = MIN(Cores)
+    // cores_upper_bound = MAX(Cores)
+    // clock_lower_bound = MIN(Clock)
+    // clock_upper_bound = MAX(Clock)
+
     console.log(req.params.itemid);
+
+    var query = "SELECT * FROM cpu, computer_part, sells WHERE cpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
+                "AND Cores > $1 AND Cores < $2 AND Clock > $3 AND Clock < $4";
 
     try
     {
-        const results = await db.query("SELECT * FROM cpu, computer_part, sells ON cpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+        const results = await db.query(query, [, , , ]);
 
         res.status(200).json({
             status: "success",
@@ -98,13 +121,23 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
 
 });
 
-//Get RAM
-app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+//Get all RAM
+app.get("/api/v1/ComputerParts/ram", async (req, res) => {
+
+    // Default variables:
+    // clock_frequency_lower_bound = MIN(Clock_Frequency)
+    // clock_frequency_upper_bound = MAX(Clock_Frequency)
+    // capacity_lower_bound = MIN(Capacity)
+    // capacity_upper_bound = MAX(Capacity)
+
     console.log(req.params.itemid);
+
+    var query = "SELECT * FROM ram, computer_part, sells WHERE ram.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
+                "AND Clock_Frequency > $1 AND Clock_Frequency < $2 AND Capacity > $3 AND Capacity < $4"
 
     try
     {
-        const results = await db.query("SELECT * FROM ram, computer_part, sells ON ram.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+        const results = await db.query(query, [, , , ]);
 
         res.status(200).json({
             status: "success",
@@ -119,6 +152,15 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
     }
 
 });
+
+// get from a certain manufacturer
+
+// get gpus from a certain range
+
+// get cpus from a certain range
+
+// get ram from a certain range
+
 
 // Create a Computer Part
 app.post("/api/v1/ComputerParts", (req, res) => {
