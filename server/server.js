@@ -54,6 +54,72 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
 
 });
 
+//Get GPUs
+app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+    console.log(req.params.itemid);
+
+    try
+    {
+        const results = await db.query("SELECT * FROM gpu, computer_part, sells ON gpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                computerPart: results.rows
+            }
+        });
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+});
+
+//Get CPUs
+app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+    console.log(req.params.itemid);
+
+    try
+    {
+        const results = await db.query("SELECT * FROM cpu, computer_part, sells ON cpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                computerPart: results.rows
+            }
+        });
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+});
+
+//Get RAM
+app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
+    console.log(req.params.itemid);
+
+    try
+    {
+        const results = await db.query("SELECT * FROM ram, computer_part, sells ON ram.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid");
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                computerPart: results.rows
+            }
+        });
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+});
+
 // Create a Computer Part
 app.post("/api/v1/ComputerParts", (req, res) => {
     console.log(req.body);
