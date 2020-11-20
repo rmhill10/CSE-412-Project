@@ -33,7 +33,7 @@ const SortComputerParts = () => {
                             <option value="12">Corsair</option>
                         </select>
                     </div>
-                    <button className="btn btn-primary">Sort</button>
+                    <button className="btn btn-primary">Search</button>
                 </div>
                 &nbsp;
                 <h2>GPU Variables</h2>

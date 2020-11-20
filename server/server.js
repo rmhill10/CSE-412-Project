@@ -55,17 +55,15 @@ app.get("/api/v1/ComputerParts/:itemid", async (req, res) => {
 });
 
 //Get all GPUs
-app.get("/api/v1/ComputerParts/gpus", async (req, res) => {
+app.get("/api/v1/ComputerParts/gpus/:power_lower_bound/:power_upper_bound/:vram_lower_bound/:vram_upper_bound/:memory_clock_lower_bound/:memory_clock_upper_bound", async (req, res) => {
     
     // Default variables:
-    // power_lower_bound = MIN(Power)
-    // power_upper_bound = MAX(Power)
-    // vram_lower_bound = MIN(VRAM)
-    // vram_upper_bound = MAX(VRAM)
-    // memory_clock_lower_bound = MIN(Memory_Clock)
-    // memory_clock_upper_bound = MAX(Memory_Clock)
-
-    console.log(req.params.itemid);
+    power_lower_bound = req.params.power_lower_bound
+    power_upper_bound = req.params.power_upper_bound
+    vram_lower_bound = req.params.vram_lower_bound
+    vram_upper_bound = req.params.vram_upper_bound
+    memory_clock_lower_bound = req.params.memory_clock_lower_bound
+    memory_clock_upper_bound = req.params.memory_clock_upper_bound
 
     var query = "SELECT * FROM gpu, computer_part, sells WHERE gpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
                 " AND Power > $1 AND Power < $2 AND VRAM > $3 AND VRAM < $4 AND Memory_Clock > $5 AND Memory_Clock < $6;";
@@ -73,32 +71,31 @@ app.get("/api/v1/ComputerParts/gpus", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [req.body.power_lower_bound, req.body.power_upper_bound, 
-                                                req.body.vram_lower_bound, req.body.vram_upper_bound, 
-                                                req.body.memory_clock_lower_bound, req.body.memory_clock_upper_bound]);
-
-        res.status(200).json({
+        const results = await db.query(query, 
+            [power_lower_bound, power_upper_bound, vram_lower_bound, vram_upper_bound, memory_clock_lower_bound, memory_clock_upper_bound]);
+        // console.log(results);
+         res.status(200).json({
             status: "success",
+            results: results.rows.length,
             data: {
                 computerPart: results.rows
             }
-        });
+         });
     }
     catch(err)
     {
         console.log(err);
     }
-
 });
 
 //Get all CPUs
-app.get("/api/v1/ComputerParts/cpu", async (req, res) => {
+app.get("/api/v1/ComputerParts/cpus/:cores_lower_bound/:cores_upper_bound/:clock_lower_bound/:clock_upper_bound", async (req, res) => {
     
     // Default variables:
-    // cores_lower_bound = MIN(Cores)
-    // cores_upper_bound = MAX(Cores)
-    // clock_lower_bound = MIN(Clock)
-    // clock_upper_bound = MAX(Clock)
+    cores_lower_bound = req.params.cores_lower_bound
+    cores_upper_bound = req.params.cores_upper_bound
+    clock_lower_bound = req.params.clock_lower_bound
+    clock_upper_bound = req.params.clock_upper_bound
 
     console.log(req.params.itemid);
 
@@ -107,15 +104,15 @@ app.get("/api/v1/ComputerParts/cpu", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [req.body.cores_lower_bound, req.body.cores_upper_bound, 
-                                                req.body.clock_lower_bound, req.body.clock_upper_bound]);
-
-        res.status(200).json({
+        const results = await db.query(query, [cores_lower_bound, cores_upper_bound, 
+                                                clock_lower_bound, clock_upper_bound]);
+         res.status(200).json({
             status: "success",
+            results: results.rows.length,
             data: {
                 computerPart: results.rows
             }
-        });
+         });
     }
     catch(err)
     {
@@ -125,13 +122,13 @@ app.get("/api/v1/ComputerParts/cpu", async (req, res) => {
 });
 
 //Get all RAM
-app.get("/api/v1/ComputerParts/ram", async (req, res) => {
+app.get("/api/v1/ComputerParts/ram/:clock_frequency_lower_bound/:clock_frequency_upper_bound/:capacity_lower_bound/:capacity_upper_bound", async (req, res) => {
 
     // Default variables:
-    // clock_frequency_lower_bound = MIN(Clock_Frequency)
-    // clock_frequency_upper_bound = MAX(Clock_Frequency)
-    // capacity_lower_bound = MIN(Capacity)
-    // capacity_upper_bound = MAX(Capacity)
+    clock_frequency_lower_bound = req.params.clock_frequency_lower_bound
+    clock_frequency_upper_bound = req.params.clock_frequency_upper_bound
+    capacity_lower_bound = req.params.capacity_lower_bound
+    capacity_upper_bound = req.params.capacity_upper_bound
 
     console.log(req.params.itemid);
 
@@ -140,15 +137,16 @@ app.get("/api/v1/ComputerParts/ram", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [req.body.clock_frequency_lower_bound, req.body.clock_frequency_upper_bound, 
-                                                req.body.capacity_lower_bound, req.body.capacity_upper_bound]);
+        const results = await db.query(query, [clock_frequency_lower_bound, clock_frequency_upper_bound, 
+                                                capacity_lower_bound, capacity_upper_bound]);
 
         res.status(200).json({
             status: "success",
+            results: results.rows.length,
             data: {
                 computerPart: results.rows
             }
-        });
+            });
     }
     catch(err)
     {
