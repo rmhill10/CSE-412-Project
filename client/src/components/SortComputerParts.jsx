@@ -35,6 +35,110 @@ const SortComputerParts = () => {
                     </div>
                     <button className="btn btn-primary">Sort</button>
                 </div>
+                &nbsp;
+                <h2>GPU Variables</h2>
+                <div className="form-row">
+                    <h5>Power Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="power_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>Power Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="power_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
+                &nbsp;
+                <div className="form-row">
+                    <h5>VRAM Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="vram_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>VRAM Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="vram_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
+                &nbsp;
+                <div className="form-row">
+                    <h5>Memory Clock Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="memory_clock_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>Memory Clock Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="memory_clock_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
+                &nbsp;
+                <h2>CPU Variables</h2>
+                &nbsp;
+                <div className="form-row">
+                    <h5>Cores Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="cores_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>Cores Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="cores_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
+                &nbsp;
+                <div className="form-row">
+                    <h5>Clock Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="clock_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>Clock Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="clock_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>&nbsp;
+                <h2>RAM Variables</h2>
+                &nbsp;
+                <div className="form-row">
+                    <h5>Clock Frequency Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="clock_frequency_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    <h5>Clock Frequency Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="clock_frequency_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
+                &nbsp;
+                <div className="form-row">
+                    <h5>Capacity Lower Bound</h5>&nbsp;
+                    <div>
+                        <input id="capacity_lower_bound" type="number" value="0"></input>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h5>Capacity Upper Bound</h5>&nbsp;
+                    <div>
+                        <input id="capacity_upper_bound" type="number" value="100"></input>
+                    </div>
+                </div>
             </form>
         </div>
     )

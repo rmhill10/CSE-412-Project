@@ -73,7 +73,9 @@ app.get("/api/v1/ComputerParts/gpus", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [, , , , , ]);
+        const results = await db.query(query, [req.body.power_lower_bound, req.body.power_upper_bound, 
+                                                req.body.vram_lower_bound, req.body.vram_upper_bound, 
+                                                req.body.memory_clock_lower_bound, req.body.memory_clock_upper_bound]);
 
         res.status(200).json({
             status: "success",
@@ -105,7 +107,8 @@ app.get("/api/v1/ComputerParts/cpu", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [, , , ]);
+        const results = await db.query(query, [req.body.cores_lower_bound, req.body.cores_upper_bound, 
+                                                req.body.clock_lower_bound, req.body.clock_upper_bound]);
 
         res.status(200).json({
             status: "success",
@@ -137,7 +140,8 @@ app.get("/api/v1/ComputerParts/ram", async (req, res) => {
 
     try
     {
-        const results = await db.query(query, [, , , ]);
+        const results = await db.query(query, [req.body.clock_frequency_lower_bound, req.body.clock_frequency_upper_bound, 
+                                                req.body.capacity_lower_bound, req.body.capacity_upper_bound]);
 
         res.status(200).json({
             status: "success",
