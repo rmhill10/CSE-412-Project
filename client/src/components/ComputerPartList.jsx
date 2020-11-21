@@ -10,6 +10,7 @@ const ComputerPartList = (props) => {
    const {computerPart, setComputerPart} = useContext(ComputerPartsContext);
 
    useEffect(() => {
+      console.log(555);
       const fetchData = async () => {
          try {
             const response = await ComputerPartFinder.get("/")

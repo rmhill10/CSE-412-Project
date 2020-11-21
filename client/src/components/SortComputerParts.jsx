@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import {Button, Select, Slider, Typography} from "antd";
 import {
@@ -10,7 +10,7 @@ import {
    Crucial,
    EVGA,
    Gigabyte,
-   GPU, GPU_POWER_LOWER_BOUND, GPU_POWER_UPPER_BOUND,
+   GPU,
    INTEL,
    MSI,
    NVIDIA,
@@ -18,17 +18,27 @@ import {
    Samsung,
    Zotac
 } from "../utils/constants";
+import ComputerPartFinder from "../apis/ComputerPartFinder";
+import {ComputerPartsContext} from "../context/ComputerPartsContext";
 
 const {Option} = Select;
 const {Title, Text} = Typography;
 
+
 const SortComputerParts = () => {
+   const {computerPart, setComputerPart} = useContext(ComputerPartsContext);
+
 
    // This function will run when the user presses search.
    // So here is where we'll make the API call using the
    // hooks' state variables
-   const runQuery = e => {
-      console.log("Run Query");
+   const runQuery = async e => {
+      try {
+         // Test Query
+         const response = await ComputerPartFinder.get("/ram/0/50000/0/50000");
+         setComputerPart(response.data.data.computerPart);
+      } catch (err) {
+      }
    }
 
    // For the type drop-down filter. The table can actually do this filter
@@ -111,6 +121,8 @@ const SortComputerParts = () => {
 
 
    return (
+
+
       <div style={{margin: "30px 0 "}}>
          <Select onChange={chosenType => typeOnChange(chosenType)}
                  style={{width: 200}} defaultValue={'Type'}>
