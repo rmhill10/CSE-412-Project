@@ -36,7 +36,14 @@ const SortComputerParts = () => {
       try {
          // Test Query
          const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
-         setComputerPart(response.data.data.computerPart);
+         setComputerPart((response.data.data.computerPart));
+
+         // Do this to merge different queries
+         // const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
+         // const response2 = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
+         // const mergedArray = response.data.data.computerPart.concat(
+         //    response2.data.data.computerPart);
+         // setComputerPart(mergedArray);
       } catch (err) {
       }
    }
@@ -148,20 +155,20 @@ const SortComputerParts = () => {
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>GPU Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text>Select Power Range</Text>
-            <Slider step={5} min={15} max={374} marks={gpuPowermarks}
+            <Text>Power (W)</Text>
+            <Slider tipFormatter={value => `${value} W`} step={5} min={15} max={374} marks={gpuPowermarks}
                     onChange={value => sliderOnChange(value, "power_")} range
                     defaultValue={[15, 195]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text>Select VRAM Range</Text>
-            <Slider step={0.5} min={0.5} max={32} marks={gpuVramMarks}
+            <Text>VRAM (GB)</Text>
+            <Slider tipFormatter={value => `${value} GB`} step={0.5} min={0.5} max={32} marks={gpuVramMarks}
                     onChange={value => sliderOnChange(value, "vram_")} range
                     defaultValue={[0.5, 16]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text>Select Memory Clock Range</Text>
-            <Slider step={20} min={600} max={1650} marks={gpuMemoryClockMarks}
+            <Text>Memory Clock (MHz)</Text>
+            <Slider tipFormatter={value => `${value} MHz`} step={20} min={600} max={1650} marks={gpuMemoryClockMarks}
                     onChange={value => sliderOnChange(value, "memory_clock_")} range
                     defaultValue={[600, 1125]}/>
          </div>
@@ -169,14 +176,14 @@ const SortComputerParts = () => {
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>CPU Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text style={{marginTop: '10px'}}>Select Cores Range</Text>
-            <Slider min={4} max={64} step={2} marks={cpuCoresMarks} onChange={value => sliderOnChange(value, "cores_")}
+            <Text style={{marginTop: '10px'}}>Cores</Text>
+            <Slider tipFormatter={value => `${value} cores`} min={4} max={64} step={2} marks={cpuCoresMarks} onChange={value => sliderOnChange(value, "cores_")}
                     range
                     defaultValue={[4, 34]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text style={{marginTop: '10px'}}>Select Clock Range</Text>
-            <Slider step={0.1} min={2.8} max={4.1} marks={cpuClockMarks}
+            <Text style={{marginTop: '10px'}}>Clock (GHz)</Text>
+            <Slider tipFormatter={value => `${value} GHz`} step={0.1} min={2.8} max={4.1} marks={cpuClockMarks}
                     onChange={value => sliderOnChange(value, "clock_")} range
                     defaultValue={[2.8, 3.5]}/>
          </div>
@@ -184,14 +191,14 @@ const SortComputerParts = () => {
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>RAM Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text style={{marginTop: '10px'}}>Select Clock Frequency Range</Text>
-            <Slider step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
+            <Text style={{marginTop: '10px'}}>Clock Frequency (GHz)</Text>
+            <Slider tipFormatter={value => `${value} GHz`} step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
                     onChange={value => sliderOnChange(value, "clock_frequency_")} range
                     defaultValue={[800, 2400]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text style={{marginTop: '10px'}}>Select Capacity Range</Text>
-            <Slider min={1} max={32} marks={ramCapacityMarks} onChange={value => sliderOnChange(value, "capacity_")}
+            <Text style={{marginTop: '10px'}}>Capacity (GB)</Text>
+            <Slider tipFormatter={value => `${value} GB`}  min={1} max={32} marks={ramCapacityMarks} onChange={value => sliderOnChange(value, "capacity_")}
                     range
                     defaultValue={[1, 16]}/>
          </div>

@@ -117,8 +117,6 @@ app.get("/api/v1/ComputerParts/ram/:clock_frequency_lower_bound/:clock_frequency
    clock_frequency_upper_bound = req.params.clock_frequency_upper_bound
    capacity_lower_bound = req.params.capacity_lower_bound
    capacity_upper_bound = req.params.capacity_upper_bound
-   console.log(clock_frequency_lower_bound);
-   console.log(req.params.itemid);
 
    var query = "SELECT * FROM ram, computer_part, sells WHERE ram.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
       "AND Clock_Frequency >= $1 AND Clock_Frequency <= $2 AND Capacity >= $3 AND Capacity <= $4"

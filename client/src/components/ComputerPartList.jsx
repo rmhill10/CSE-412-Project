@@ -99,7 +99,6 @@ const ComputerPartList = (props) => {
 
       }
    )
-   console.log(data);
    return (<Table scroll={{y: 600}} columns={columns} dataSource={data}/>)
 }
 
