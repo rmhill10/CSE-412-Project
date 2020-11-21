@@ -53,53 +53,42 @@ const SortComputerParts = () => {
             </Select>
             <Button type={'primary'}>Search</Button>
 
-            <Title style={{marginTop: '30px'}} level={4}>GPU Variables</Title>
-            <Row>
-               <Text style={{marginTop: '10px'}}>Select Power Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "power_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
-            <Row>
-               <Text style={{marginTop: '10px'}}>Select VRAM Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "vram_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
-            <Row>
-               <Text style={{marginTop: '10px'}}>Select Memory Clock Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "memory_clock_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
+            <Title style={{margin: '30px 0 20px 0'}} level={4}>GPU Variables</Title>
+            <div style={{margin: '0 0 20px 0'}}>
+               <Text>Select Power Range</Text>
+               <Slider onChange={value => sliderOnChange(value, "power_")} range
+                       defaultValue={[0, 50]}/>
+            </div>
+            <div style={{margin: '0 0 20px 0'}}><Text>Select VRAM Range</Text>
+               <Slider onChange={value => sliderOnChange(value, "vram_")} range
+                       defaultValue={[0, 50]}/>
+            </div>
+            <div style={{margin: '0 0 20px 0'}}><Text>Select Memory Clock Range</Text>
+               <Slider onChange={value => sliderOnChange(value, "memory_clock_")} range
+                       defaultValue={[0, 50]}/>
+            </div>
 
-            <Title style={{marginTop: '30px'}} level={4}>CPU Variables</Title>
-            <Row>
+
+            <Title style={{margin: '30px 0 20px 0'}} level={4}>CPU Variables</Title>
+            <div style={{margin: '0 0 20px 0'}}>
                <Text style={{marginTop: '10px'}}>Select Cores Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "cores_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
-            <Row>
+               <Slider onChange={value => sliderOnChange(value, "cores_")} range defaultValue={[0, 50]}/>
+            </div>
+            <div style={{margin: '0 0 20px 0'}}>
                <Text style={{marginTop: '10px'}}>Select Clock Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "clock_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
+               <Slider onChange={value => sliderOnChange(value, "clock_")} range defaultValue={[0, 50]}/>
+            </div>
 
-            <Title style={{marginTop: '30px'}} level={4}>RAM Variables</Title>
-            <Row>
+
+            <Title style={{margin: '30px 0 20px 0'}} level={4}>RAM Variables</Title>
+            <div style={{margin: '0 0 20px 0'}}>
                <Text style={{marginTop: '10px'}}>Select Clock Frequency Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "clock_frequency_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
-            <Row>
+               <Slider onChange={value => sliderOnChange(value, "clock_frequency_")} range defaultValue={[0, 50]}/>
+            </div>
+            <div style={{margin: '0 0 20px 0'}}>
                <Text style={{marginTop: '10px'}}>Select Capacity Range</Text>
-               <Col md={24}>
-                  <Slider onChange={value => sliderOnChange(value, "capacity_")} range defaultValue={[0, 50]}/>
-               </Col>
-            </Row>
+               <Slider onChange={value => sliderOnChange(value, "capacity_")} range defaultValue={[0, 50]}/>
+            </div>
          </form>
       </div>
    )
