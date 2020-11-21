@@ -35,7 +35,7 @@ const SortComputerParts = () => {
    const runQuery = async e => {
       try {
          // Test Query
-         const response = await ComputerPartFinder.get("/ram/0/50000/0/50000");
+         const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
          setComputerPart(response.data.data.computerPart);
       } catch (err) {
       }
@@ -43,7 +43,7 @@ const SortComputerParts = () => {
 
    // For the type drop-down filter. The table can actually do this filter
    // on its own on the frontend. Not sure if that's allowed tho
-   const [type, setType] = useState('All');
+   const [type, setType] = useState(ALL);
 
    const typeOnChange = type => {
       setType(type);
@@ -59,20 +59,20 @@ const SortComputerParts = () => {
    // All of these will get updated automatically when the user
    // uses the slider. 'bounds' is an object, so retrieve these using bounds.power_lower_bound, etc
    const [bounds, setBounds] = useState({
-      power_lower_bound: 0,
-      power_upper_bound: 50,
-      vram_lower_bound: 0,
-      vram_upper_bound: 50,
-      memory_clock_lower_bound: 0,
-      memory_clock_upper_bound: 50,
-      cores_lower_bound: 0,
-      cores_upper_bound: 50,
-      clock_lower_bound: 0,
-      clock_upper_bound: 50,
-      clock_frequency_lower_bound: 0,
-      clock_frequency_upper_bound: 50,
-      capacity_lower_bound: 0,
-      capacity_upper_bound: 50
+      power_lower_bound: 15,
+      power_upper_bound: 195,
+      vram_lower_bound: 0.5,
+      vram_upper_bound: 16,
+      memory_clock_lower_bound: 600,
+      memory_clock_upper_bound: 1125,
+      cores_lower_bound: 4,
+      cores_upper_bound: 34,
+      clock_lower_bound: 2.8,
+      clock_upper_bound: 3.5,
+      clock_frequency_lower_bound: 800,
+      clock_frequency_upper_bound: 2400,
+      capacity_lower_bound: 1,
+      capacity_upper_bound: 16
    })
 
    // Every time a slider is edited, this function is called
@@ -82,47 +82,45 @@ const SortComputerParts = () => {
    }
 
    // Labels each slider at the given points.
-   // Ranges will need to change but i just used [0, 100] as the default
    const gpuPowermarks = {
-      0: 0,
-      50: '50',
-      100: '100'
+      15: '15',
+      195: '195',
+      374: '374'
    }
    const gpuVramMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      0.5: '0.5',
+      16: '16',
+      32: '32'
    }
    const gpuMemoryClockMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      600: '600',
+      1125: '1125',
+      1650: '1650'
    }
    const cpuCoresMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      4: '4',
+      34: '34',
+      64: '64'
    }
    const cpuClockMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      2.8: '2.8',
+      3.5: '3.5',
+      4.1: '4.1'
    }
    const ramClockFrequencyMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      800: '800',
+      2400: '2400',
+      4000: '4000'
    }
    const ramCapacityMarks = {
-      0: '0',
-      50: '50',
-      100: '100'
+      1: '1',
+      8: '8',
+      16: '16',
+      32: '32'
    }
 
 
    return (
-
-
       <div style={{margin: "30px 0 "}}>
          <Select onChange={chosenType => typeOnChange(chosenType)}
                  style={{width: 200}} defaultValue={'Type'}>
@@ -151,42 +149,51 @@ const SortComputerParts = () => {
          <Title style={{margin: '30px 0 20px 0'}} level={4}>GPU Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
             <Text>Select Power Range</Text>
-            <Slider min={0} max={100} marks={gpuPowermarks} onChange={value => sliderOnChange(value, "power_")} range
-                    defaultValue={[0, 50]}/>
+            <Slider step={5} min={15} max={374} marks={gpuPowermarks}
+                    onChange={value => sliderOnChange(value, "power_")} range
+                    defaultValue={[15, 195]}/>
          </div>
-         <div style={{margin: '0 0 40px 0'}}><Text>Select VRAM Range</Text>
-            <Slider marks={gpuVramMarks} onChange={value => sliderOnChange(value, "vram_")} range
-                    defaultValue={[0, 50]}/>
+         <div style={{margin: '0 0 40px 0'}}>
+            <Text>Select VRAM Range</Text>
+            <Slider step={0.5} min={0.5} max={32} marks={gpuVramMarks}
+                    onChange={value => sliderOnChange(value, "vram_")} range
+                    defaultValue={[0.5, 16]}/>
          </div>
-         <div style={{margin: '0 0 40px 0'}}><Text>Select Memory Clock Range</Text>
-            <Slider marks={gpuMemoryClockMarks} onChange={value => sliderOnChange(value, "memory_clock_")} range
-                    defaultValue={[0, 50]}/>
+         <div style={{margin: '0 0 40px 0'}}>
+            <Text>Select Memory Clock Range</Text>
+            <Slider step={20} min={600} max={1650} marks={gpuMemoryClockMarks}
+                    onChange={value => sliderOnChange(value, "memory_clock_")} range
+                    defaultValue={[600, 1125]}/>
          </div>
 
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>CPU Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Select Cores Range</Text>
-            <Slider marks={cpuCoresMarks} onChange={value => sliderOnChange(value, "cores_")} range
-                    defaultValue={[0, 50]}/>
+            <Slider min={4} max={64} step={2} marks={cpuCoresMarks} onChange={value => sliderOnChange(value, "cores_")}
+                    range
+                    defaultValue={[4, 34]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Select Clock Range</Text>
-            <Slider marks={cpuClockMarks} onChange={value => sliderOnChange(value, "clock_")} range
-                    defaultValue={[0, 50]}/>
+            <Slider step={0.1} min={2.8} max={4.1} marks={cpuClockMarks}
+                    onChange={value => sliderOnChange(value, "clock_")} range
+                    defaultValue={[2.8, 3.5]}/>
          </div>
 
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>RAM Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Select Clock Frequency Range</Text>
-            <Slider marks={ramClockFrequencyMarks} onChange={value => sliderOnChange(value, "clock_frequency_")} range
-                    defaultValue={[0, 50]}/>
+            <Slider step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
+                    onChange={value => sliderOnChange(value, "clock_frequency_")} range
+                    defaultValue={[800, 2400]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Select Capacity Range</Text>
-            <Slider marks={ramCapacityMarks} onChange={value => sliderOnChange(value, "capacity_")} range
-                    defaultValue={[0, 50]}/>
+            <Slider min={1} max={32} marks={ramCapacityMarks} onChange={value => sliderOnChange(value, "capacity_")}
+                    range
+                    defaultValue={[1, 16]}/>
          </div>
       </div>
    )

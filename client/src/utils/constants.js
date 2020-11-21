@@ -2,7 +2,6 @@ export const GPU_POWER_LOWER_BOUND = 0;
 export const GPU_POWER_UPPER_BOUND = 100;
 
 
-
 export const ALL = 'ALL';
 export const GPU = 'GPU';
 export const RAM = 'RAM';
