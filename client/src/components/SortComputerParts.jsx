@@ -1,15 +1,35 @@
 import 'antd/dist/antd.css';
 
-import React, {Fragment} from 'react';
-import {Button, Col, InputNumber, Row, Select, Space, Typography} from "antd";
+import React, {useState} from 'react';
+import {Button, Col, InputNumber, Row, Select, Slider, Space, Typography} from "antd";
 
 const {Option} = Select;
 const {Title, Text} = Typography;
 const SortComputerParts = () => {
+   const [filterData, setFilterData] = useState({
+      power_lower_bound: 0,
+      power_upper_bound: 50,
+      vram_lower_bound: 0,
+      vram_upper_bound: 50,
+      memory_clock_lower_bound: 0,
+      memory_clock_upper_bound: 50,
+      cores_lower_bound: 0,
+      cores_upper_bound: 50,
+      clock_lower_bound: 0,
+      clock_upper_bound: 50,
+      clock_frequency_lower_bound: 0,
+      clock_frequency_upper_bound: 50,
+      capacity_lower_bound: 0,
+      capacity_upper_bound: 50
+   })
 
+
+   const sliderOnChange = async (value, type) => {
+      setFilterData({...filterData, [type + "lower_bound"]: value[0], [type + "upper_bound"]: value[1]});
+   }
 
    return (
-      <div style={{margin:"30px 0 "}}  >
+      <div style={{margin: "30px 0 "}}>
          <form action="">
             <Select style={{width: 200}} defaultValue={'Type'}>
                <Option value="1">All</Option>
@@ -35,92 +55,49 @@ const SortComputerParts = () => {
 
             <Title style={{marginTop: '30px'}} level={4}>GPU Variables</Title>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>
-                     <Text>Power Lower Bound</Text>
-                     <InputNumber id="power_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Power Upper Bound
-                     <InputNumber id="power_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Power Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "power_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>VRAM Lower Bound
-                     <InputNumber id="vram_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>VRAM Upper Bound
-                     <InputNumber id="vram_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select VRAM Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "vram_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Memory Clock Lower Bound
-                     <InputNumber id="memory_clock_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Memory Clock Upper Bound
-                     <InputNumber id="memory_clock_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Memory Clock Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "memory_clock_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
 
             <Title style={{marginTop: '30px'}} level={4}>CPU Variables</Title>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Cores Lower Bound
-                     <InputNumber id="cores_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Cores Upper Bound
-                     <InputNumber id="cores_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Cores Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "cores_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Clock Lower Bound
-                     <InputNumber id="clock_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Clock Upper Bound
-                     <InputNumber id="clock_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Clock Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "clock_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
 
             <Title style={{marginTop: '30px'}} level={4}>RAM Variables</Title>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Clock Frequency Lower Bound
-                     <InputNumber id="clock_frequency_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Clock Frequency Upper Bound
-                     <InputNumber id="clock_frequency_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Clock Frequency Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "clock_frequency_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
             <Row>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Capacity Lower Bound
-                     <InputNumber id="capacity_lower_bound" type="number" value="0"/>
-                  </Space>
-               </Col>
-               <Col md={12}>
-                  <Space direction={'horizontal'}>Capacity Upper Bound
-                     <InputNumber id="capacity_upper_bound" type="number" value="100"/>
-                  </Space>
+               <Text style={{marginTop: '10px'}}>Select Capacity Range</Text>
+               <Col md={24}>
+                  <Slider onChange={value => sliderOnChange(value, "capacity_")} range defaultValue={[0, 50]}/>
                </Col>
             </Row>
          </form>
