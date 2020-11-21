@@ -2,19 +2,37 @@ import 'antd/dist/antd.css';
 import React, {useState} from 'react';
 
 import {Button, Select, Slider, Typography} from "antd";
+
 const {Option} = Select;
 const {Title, Text} = Typography;
 
 const SortComputerParts = () => {
 
-   // This function will run when the user presses search
+   // This function will run when the user presses search.
+   // So here is where we'll make the API call using the
+   // hooks' state variables
    const runQuery = e => {
       console.log("Run Query");
    }
 
+   // For the type drop-down filter. The table can actually do this filter
+   // on its own on the frontend. Not sure if that's allowed tho
+   const [type, setType] = useState('All');
+
+   const typeOnChange = type => {
+      setType(type);
+   }
+
+   // Same logic as above
+   const [manufacturer, setManufacturer] = useState('All');
+
+   const manufacturerOnChange = manufacturer => {
+      setManufacturer(manufacturer);
+   }
+
    // All of these will get updated automatically when the user
-   // uses the slider.
-   const [filterData, setFilterData] = useState({
+   // uses the slider. 'bounds' is an object, so retrieve these using bounds.power_lower_bound, etc
+   const [bounds, setBounds] = useState({
       power_lower_bound: 0,
       power_upper_bound: 50,
       vram_lower_bound: 0,
@@ -30,6 +48,12 @@ const SortComputerParts = () => {
       capacity_lower_bound: 0,
       capacity_upper_bound: 50
    })
+
+   // Every time a slider is edited, this function is called
+   // and the corresponding state variable gets changed
+   const sliderOnChange = async (value, type) => {
+      setBounds({...bounds, [type + "lower_bound"]: value[0], [type + "upper_bound"]: value[1]});
+   }
 
    // Labels each slider at the given points.
    // Ranges will need to change but i just used [0, 100] as the default
@@ -69,33 +93,30 @@ const SortComputerParts = () => {
       100: '100'
    }
 
-   // Every time a slider is edited, this function is called
-   // and the corresponding hook (variable) gets changed
-   const sliderOnChange = async (value, type) => {
-      setFilterData({...filterData, [type + "lower_bound"]: value[0], [type + "upper_bound"]: value[1]});
-   }
 
    return (
       <div style={{margin: "30px 0 "}}>
-         <Select style={{width: 200}} defaultValue={'Type'}>
-            <Option value="1">All</Option>
-            <Option value="2">GPU</Option>
-            <Option value="3">CPU</Option>
-            <Option value="4">RAM</Option>
+         <Select onChange={chosenType => typeOnChange(chosenType)}
+                 style={{width: 200}} defaultValue={'Type'}>
+            <Option value="All">All</Option>
+            <Option value="GPU">GPU</Option>
+            <Option value="CPU">CPU</Option>
+            <Option value="RAM">RAM</Option>
          </Select>
-         <Select style={{width: 200}} defaultValue={'Manufacturer'}>
-            <Option value="1">All</Option>
-            <Option value="2">INTEL</Option>
-            <Option value="3">AMD</Option>
-            <Option value="4">NVIDIA</Option>
-            <Option value="5">Gigabyte</Option>
-            <Option value="6">MSI</Option>
-            <Option value="7">Asus</Option>
-            <Option value="8">EVGA</Option>
-            <Option value="9">Zotac</Option>
-            <Option value="10">Crucial</Option>
-            <Option value="11">Samsung</Option>
-            <Option value="12">Corsair</Option>
+         <Select onChange={chosenManufacturer => manufacturerOnChange(chosenManufacturer)}
+                 style={{width: 200}} defaultValue={'Manufacturer'}>
+            <Option value="ALL">All</Option>
+            <Option value="INTEL">INTEL</Option>
+            <Option value="AMD">AMD</Option>
+            <Option value="NVIDIA">NVIDIA</Option>
+            <Option value="Gigabyte">Gigabyte</Option>
+            <Option value="MSI">MSI</Option>
+            <Option value="Asus">Asus</Option>
+            <Option value="EVGA">EVGA</Option>
+            <Option value="Zotac">Zotac</Option>
+            <Option value="Crucial">Crucial</Option>
+            <Option value="Samsung">Samsung</Option>
+            <Option value="Corsair">Corsair</Option>
          </Select>
          <Button onClick={(e => runQuery(e))} type={'primary'}>Search</Button>
 
