@@ -1,9 +1,11 @@
 import React from 'react'
+import {Typography} from "antd";
 
+const {Title} = Typography;
 const Header = () => {
     return (
         <div>
-            <h1 className="font-weight-light display-1 text-center">Computer Parts</h1>
+           <Title style={{margin:'40px 0'}}>Computer Parts</Title>
         </div>
     )
 }
