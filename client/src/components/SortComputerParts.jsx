@@ -2,6 +2,22 @@ import 'antd/dist/antd.css';
 import React, {useState} from 'react';
 
 import {Button, Select, Slider, Typography} from "antd";
+import {
+   ALL,
+   AMD,
+   Asus, Corsair,
+   CPU,
+   Crucial,
+   EVGA,
+   Gigabyte,
+   GPU, GPU_POWER_LOWER_BOUND, GPU_POWER_UPPER_BOUND,
+   INTEL,
+   MSI,
+   NVIDIA,
+   RAM,
+   Samsung,
+   Zotac
+} from "../utils/constants";
 
 const {Option} = Select;
 const {Title, Text} = Typography;
@@ -24,7 +40,7 @@ const SortComputerParts = () => {
    }
 
    // Same logic as above
-   const [manufacturer, setManufacturer] = useState('All');
+   const [manufacturer, setManufacturer] = useState(ALL);
 
    const manufacturerOnChange = manufacturer => {
       setManufacturer(manufacturer);
@@ -58,7 +74,7 @@ const SortComputerParts = () => {
    // Labels each slider at the given points.
    // Ranges will need to change but i just used [0, 100] as the default
    const gpuPowermarks = {
-      0: '0',
+      0: 0,
       50: '50',
       100: '100'
    }
@@ -98,25 +114,25 @@ const SortComputerParts = () => {
       <div style={{margin: "30px 0 "}}>
          <Select onChange={chosenType => typeOnChange(chosenType)}
                  style={{width: 200}} defaultValue={'Type'}>
-            <Option value="All">All</Option>
-            <Option value="GPU">GPU</Option>
-            <Option value="CPU">CPU</Option>
-            <Option value="RAM">RAM</Option>
+            <Option value={ALL}>All</Option>
+            <Option value={GPU}>GPU</Option>
+            <Option value={CPU}>CPU</Option>
+            <Option value={RAM}>RAM</Option>
          </Select>
          <Select onChange={chosenManufacturer => manufacturerOnChange(chosenManufacturer)}
                  style={{width: 200}} defaultValue={'Manufacturer'}>
-            <Option value="ALL">All</Option>
-            <Option value="INTEL">INTEL</Option>
-            <Option value="AMD">AMD</Option>
-            <Option value="NVIDIA">NVIDIA</Option>
-            <Option value="Gigabyte">Gigabyte</Option>
-            <Option value="MSI">MSI</Option>
-            <Option value="Asus">Asus</Option>
-            <Option value="EVGA">EVGA</Option>
-            <Option value="Zotac">Zotac</Option>
-            <Option value="Crucial">Crucial</Option>
-            <Option value="Samsung">Samsung</Option>
-            <Option value="Corsair">Corsair</Option>
+            <Option value={ALL}>All</Option>
+            <Option value={INTEL}>INTEL</Option>
+            <Option value={AMD}>AMD</Option>
+            <Option value={NVIDIA}>NVIDIA</Option>
+            <Option value={Gigabyte}>Gigabyte</Option>
+            <Option value={MSI}>MSI</Option>
+            <Option value={Asus}>Asus</Option>
+            <Option value={EVGA}>EVGA</Option>
+            <Option value={Zotac}>Zotac</Option>
+            <Option value={Crucial}>Crucial</Option>
+            <Option value={Samsung}>Samsung</Option>
+            <Option value={Corsair}>Corsair</Option>
          </Select>
          <Button onClick={(e => runQuery(e))} type={'primary'}>Search</Button>
 
