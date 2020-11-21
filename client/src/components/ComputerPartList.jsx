@@ -27,26 +27,28 @@ const ComputerPartList = (props) => {
          title: "Name",
          dataIndex: "name",
          key: "name",
-         width:300
+         width: 300
       },
       {
          title: "Type",
          dataIndex: "type",
          key: "type",
-         filters:[
+         filters: [
             {
-               text:"GPU",
-               value:"GPU"
+               text: "GPU",
+               value: "GPU"
             },
             {
-               text:"CPU",
+               text: "CPU",
                value: "CPU"
             },
             {
-               text:"RAM",
+               text: "RAM",
                value: "RAM"
             },
-         ]
+         ],
+         onFilter: (value, record) => record.type === value
+
       },
       {
          title: "Price",
@@ -98,7 +100,7 @@ const ComputerPartList = (props) => {
       }
    )
    console.log(data);
-   return (<Table scroll={{y:600}} columns={columns} dataSource={data}/>)
+   return (<Table scroll={{y: 600}} columns={columns} dataSource={data}/>)
 }
 
 export default ComputerPartList
