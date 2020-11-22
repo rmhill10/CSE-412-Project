@@ -30,6 +30,61 @@ const ComputerPartList = (props) => {
          width: 300
       },
       {
+         title: "Manufacturer",
+         dataIndex: "manufacturer",
+         key: "manufacturer",
+         filters: [
+            {
+               text: "INTEL",
+               value: "INTEL"
+            },
+            {
+               text: "AMD",
+               value: "AMD"
+            },
+            {
+               text: "NVIDIA",
+               value: "NVIDIA"
+            },
+            {
+               text: "Gigabyte",
+               value: "Gigabyte"
+            },
+            {
+               text: "MSI",
+               value: "MSI"
+            },
+            {
+               text: "Asus",
+               value: "Asus"
+            },
+            {
+               text: "EVGA",
+               value: "EVGA"
+            },
+            {
+               text: "Zotac",
+               value: "Zotac"
+            },
+            {
+               text: "Crucial",
+               value: "Crucial"
+            },
+            {
+               text: "Samsung",
+               value: "Samsung"
+            },
+            {
+               text: "Corsair",
+               value: "Corsair"
+            },
+         ],
+         onFilter: (value, record) => record.manufacturer === value,
+
+         width: 125
+
+      },
+      {
          title: "Type",
          dataIndex: "type",
          key: "type",
@@ -47,20 +102,24 @@ const ComputerPartList = (props) => {
                value: "RAM"
             },
          ],
-         onFilter: (value, record) => record.type === value
+         onFilter: (value, record) => record.type === value,
+         width: 100
 
       },
       {
          title: "Price ($)",
          dataIndex: "price",
          key: "price",
-         sorter: (a, b) => a.price - b.price
+         sorter: (a, b) => a.price - b.price,
+         width: 150
+
       },
       {
          title: "Website",
          dataIndex: "weburl",
          key: "weburl",
-         render: weburl => <Link>{weburl}</Link>
+         render: weburl => <Link>{weburl}</Link>,
+         width: 200
       },
    ]
 
@@ -70,6 +129,7 @@ const ComputerPartList = (props) => {
                {
                   key: uuid(),
                   name: part.itemname,
+                  manufacturer: part.name,
                   type: "GPU",
                   price: part.price,
                   weburl: part.weburl
@@ -80,6 +140,7 @@ const ComputerPartList = (props) => {
                {
                   key: uuid(),
                   name: part.itemname,
+                  manufacturer: part.name,
                   type: "CPU",
                   price: part.price,
                   weburl: part.weburl
@@ -90,6 +151,7 @@ const ComputerPartList = (props) => {
                {
                   key: uuid(),
                   name: part.itemname,
+                  manufacturer: part.name,
                   type: "RAM",
                   price: part.price,
                   weburl: part.weburl

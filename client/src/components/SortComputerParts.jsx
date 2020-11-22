@@ -39,18 +39,18 @@ const SortComputerParts = () => {
          // setComputerPart((response.data.data.computerPart));
 
          // Do this to merge different queries
-         
-         if(type==GPU)
+
+         if(type===GPU)
          {
             const response = await ComputerPartFinder.get(`/gpus/${bounds.power_lower_bound}/${bounds.power_upper_bound}/${bounds.vram_lower_bound}/${bounds.vram_upper_bound}/${bounds.memory_clock_lower_bound}/${bounds.memory_clock_upper_bound}`);
             setComputerPart((response.data.data.computerPart));
          }
-         else if(type==CPU)
+         else if(type===CPU)
          {
             const response = await ComputerPartFinder.get(`/cpus/${bounds.cores_lower_bound}/${bounds.cores_upper_bound}/${bounds.clock_lower_bound}/${bounds.clock_upper_bound}`);
             setComputerPart((response.data.data.computerPart));
          }
-         else if(type==RAM)
+         else if(type===RAM)
          {
             const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
             setComputerPart((response.data.data.computerPart));
@@ -64,7 +64,7 @@ const SortComputerParts = () => {
                response2.data.data.computerPart, response3.data.data.computerPart);
             setComputerPart(mergedArray);
          }
-         
+
       } catch (err) {
       }
    }
