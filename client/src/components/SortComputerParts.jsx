@@ -212,8 +212,8 @@ const SortComputerParts = () => {
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>RAM Variables</Title>
          <div style={{margin: '0 0 40px 0'}}>
-            <Text style={{marginTop: '10px'}}>Clock Frequency (GHz)</Text>
-            <Slider tipFormatter={value => `${value} GHz`} step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
+            <Text style={{marginTop: '10px'}}>Clock Frequency (MHz)</Text>
+            <Slider tipFormatter={value => `${value} MHz`} step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
                     onChange={value => sliderOnChange(value, "clock_frequency_")} range
                     defaultValue={[800, 2400]}/>
          </div>
