@@ -35,15 +35,36 @@ const SortComputerParts = () => {
    const runQuery = async e => {
       try {
          // Test Query
-         const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
-         setComputerPart((response.data.data.computerPart));
+         // const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
+         // setComputerPart((response.data.data.computerPart));
 
          // Do this to merge different queries
-         // const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
-         // const response2 = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
-         // const mergedArray = response.data.data.computerPart.concat(
-         //    response2.data.data.computerPart);
-         // setComputerPart(mergedArray);
+         
+         if(type==GPU)
+         {
+            const response = await ComputerPartFinder.get(`/gpus/${bounds.power_lower_bound}/${bounds.power_upper_bound}/${bounds.vram_lower_bound}/${bounds.vram_upper_bound}/${bounds.memory_clock_lower_bound}/${bounds.memory_clock_upper_bound}`);
+            setComputerPart((response.data.data.computerPart));
+         }
+         else if(type==CPU)
+         {
+            const response = await ComputerPartFinder.get(`/cpus/${bounds.cores_lower_bound}/${bounds.cores_upper_bound}/${bounds.clock_lower_bound}/${bounds.clock_upper_bound}`);
+            setComputerPart((response.data.data.computerPart));
+         }
+         else if(type==RAM)
+         {
+            const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
+            setComputerPart((response.data.data.computerPart));
+         }
+         else
+         {
+            const response = await ComputerPartFinder.get(`/ram/${bounds.clock_frequency_lower_bound}/${bounds.clock_frequency_upper_bound}/${bounds.capacity_lower_bound}/${bounds.capacity_upper_bound}`);
+            const response2 = await ComputerPartFinder.get(`/gpus/${bounds.power_lower_bound}/${bounds.power_upper_bound}/${bounds.vram_lower_bound}/${bounds.vram_upper_bound}/${bounds.memory_clock_lower_bound}/${bounds.memory_clock_upper_bound}`);
+            const response3 = await ComputerPartFinder.get(`/cpus/${bounds.cores_lower_bound}/${bounds.cores_upper_bound}/${bounds.clock_lower_bound}/${bounds.clock_upper_bound}`);
+            const mergedArray = response.data.data.computerPart.concat(
+               response2.data.data.computerPart, response3.data.data.computerPart);
+            setComputerPart(mergedArray);
+         }
+         
       } catch (err) {
       }
    }

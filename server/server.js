@@ -60,7 +60,7 @@ app.get("/api/v1/ComputerParts/gpus/:power_lower_bound/:power_upper_bound/:vram_
    memory_clock_upper_bound = req.params.memory_clock_upper_bound
 
    var query = "SELECT * FROM gpu, computer_part, sells WHERE gpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
-      " AND Power > $1 AND Power < $2 AND VRAM > $3 AND VRAM < $4 AND Memory_Clock > $5 AND Memory_Clock < $6;";
+      " AND Power >= $1 AND Power <= $2 AND VRAM >= $3 AND VRAM <= $4 AND Memory_Clock >= $5 AND Memory_Clock <= $6;";
 
 
    try {
@@ -91,7 +91,7 @@ app.get("/api/v1/ComputerParts/cpus/:cores_lower_bound/:cores_upper_bound/:clock
    console.log(req.params.itemid);
 
    var query = "SELECT * FROM cpu, computer_part, sells WHERE cpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid " +
-      "AND Cores > $1 AND Cores < $2 AND Clock > $3 AND Clock < $4";
+      "AND Cores >= $1 AND Cores <= $2 AND Clock >= $3 AND Clock <= $4";
 
    try {
       const results = await db.query(query, [cores_lower_bound, cores_upper_bound,
