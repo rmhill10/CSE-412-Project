@@ -88,8 +88,8 @@ app.get("/api/v1/ComputerParts/cpus/:cores_lower_bound/:cores_upper_bound/:clock
    clock_lower_bound = req.params.clock_lower_bound
    clock_upper_bound = req.params.clock_upper_bound
 
-   console.log(cores_lower_bound);
-   console.log(cores_upper_bound);
+   // console.log(cores_lower_bound);
+   // console.log(cores_upper_bound);
 
 
    var query = "SELECT * FROM cpu, computer_part, sells, makes, manufacturer WHERE cpu.itemid = computer_part.itemid AND computer_part.itemid = sells.itemid AND computer_part.itemid = makes.itemid AND makes.mid=manufacturer.mid " +

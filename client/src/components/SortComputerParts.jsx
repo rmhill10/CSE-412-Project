@@ -88,19 +88,19 @@ const SortComputerParts = () => {
    // uses the slider. 'bounds' is an object, so retrieve these using bounds.power_lower_bound, etc
    const [bounds, setBounds] = useState({
       power_lower_bound: 15,
-      power_upper_bound: 195,
+      power_upper_bound: 374,
       vram_lower_bound: 0.5,
-      vram_upper_bound: 16,
+      vram_upper_bound: 32,
       memory_clock_lower_bound: 600,
-      memory_clock_upper_bound: 1125,
+      memory_clock_upper_bound: 1650,
       cores_lower_bound: 4,
-      cores_upper_bound: 34,
+      cores_upper_bound: 64,
       clock_lower_bound: 2.8,
-      clock_upper_bound: 3.5,
+      clock_upper_bound: 4.1,
       clock_frequency_lower_bound: 800,
-      clock_frequency_upper_bound: 2400,
+      clock_frequency_upper_bound: 4000,
       capacity_lower_bound: 1,
-      capacity_upper_bound: 16
+      capacity_upper_bound: 32
    })
 
    // Every time a slider is edited, this function is called
@@ -157,21 +157,6 @@ const SortComputerParts = () => {
             <Option value={CPU}>CPU</Option>
             <Option value={RAM}>RAM</Option>
          </Select>
-         <Select onChange={chosenManufacturer => manufacturerOnChange(chosenManufacturer)}
-                 style={{width: 200}} defaultValue={'Manufacturer'}>
-            <Option value={ALL}>All</Option>
-            <Option value={INTEL}>INTEL</Option>
-            <Option value={AMD}>AMD</Option>
-            <Option value={NVIDIA}>NVIDIA</Option>
-            <Option value={Gigabyte}>Gigabyte</Option>
-            <Option value={MSI}>MSI</Option>
-            <Option value={Asus}>Asus</Option>
-            <Option value={EVGA}>EVGA</Option>
-            <Option value={Zotac}>Zotac</Option>
-            <Option value={Crucial}>Crucial</Option>
-            <Option value={Samsung}>Samsung</Option>
-            <Option value={Corsair}>Corsair</Option>
-         </Select>
          <Button onClick={(e => runQuery(e))} type={'primary'}>Search</Button>
 
          <Title style={{margin: '30px 0 20px 0'}} level={4}>GPU Variables</Title>
@@ -179,19 +164,19 @@ const SortComputerParts = () => {
             <Text>Power (W)</Text>
             <Slider tipFormatter={value => `${value} W`} step={5} min={15} max={374} marks={gpuPowermarks}
                     onChange={value => sliderOnChange(value, "power_")} range
-                    defaultValue={[15, 195]}/>
+                    defaultValue={[15, 374]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text>VRAM (GB)</Text>
             <Slider tipFormatter={value => `${value} GB`} step={0.5} min={0.5} max={32} marks={gpuVramMarks}
                     onChange={value => sliderOnChange(value, "vram_")} range
-                    defaultValue={[0.5, 16]}/>
+                    defaultValue={[0.5, 32]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text>Memory Clock (MHz)</Text>
             <Slider tipFormatter={value => `${value} MHz`} step={20} min={600} max={1650} marks={gpuMemoryClockMarks}
                     onChange={value => sliderOnChange(value, "memory_clock_")} range
-                    defaultValue={[600, 1125]}/>
+                    defaultValue={[600, 1650]}/>
          </div>
 
 
@@ -200,13 +185,13 @@ const SortComputerParts = () => {
             <Text style={{marginTop: '10px'}}>Cores</Text>
             <Slider tipFormatter={value => `${value} cores`} min={4} max={64} step={2} marks={cpuCoresMarks} onChange={value => sliderOnChange(value, "cores_")}
                     range
-                    defaultValue={[4, 34]}/>
+                    defaultValue={[4, 64]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Clock (GHz)</Text>
             <Slider tipFormatter={value => `${value} GHz`} step={0.1} min={2.8} max={4.1} marks={cpuClockMarks}
                     onChange={value => sliderOnChange(value, "clock_")} range
-                    defaultValue={[2.8, 3.5]}/>
+                    defaultValue={[2.8, 4.1]}/>
          </div>
 
 
@@ -215,13 +200,13 @@ const SortComputerParts = () => {
             <Text style={{marginTop: '10px'}}>Clock Frequency (MHz)</Text>
             <Slider tipFormatter={value => `${value} MHz`} step={50} min={800} max={4000} marks={ramClockFrequencyMarks}
                     onChange={value => sliderOnChange(value, "clock_frequency_")} range
-                    defaultValue={[800, 2400]}/>
+                    defaultValue={[800, 4000]}/>
          </div>
          <div style={{margin: '0 0 40px 0'}}>
             <Text style={{marginTop: '10px'}}>Capacity (GB)</Text>
             <Slider tipFormatter={value => `${value} GB`}  min={1} max={32} marks={ramCapacityMarks} onChange={value => sliderOnChange(value, "capacity_")}
                     range
-                    defaultValue={[1, 16]}/>
+                    defaultValue={[1, 32]}/>
          </div>
       </div>
    )
